@@ -14,6 +14,7 @@ var axis = /** @class */ (function () {
         //this.spin_2(); // translating 3d coordinates to 2d coordinates
         this.spin_3(1); // 3d object test A
         //this.spin_3(2); // 3d object test B
+        //this.spin_3(2); // static 3d object
     }
     axis.prototype.draw_axes = function () {
         this.draw_axis(this.rotation[0], this.center, "red"); // x
@@ -117,9 +118,10 @@ var axis = /** @class */ (function () {
     axis.prototype.spin_3 = function (iteration) {
         var _this = this;
         if (iteration === void 0) { iteration = 1; }
-        var step = 0.2;
-        var step2 = 0;
-        var step3 = 0.2;
+        // change following variables to adjust spinnig
+        var step = 0.2; // x
+        var step2 = 0; // y
+        var step3 = 0.2; // z
         var inter = setInterval(function () {
             _this.cnvs.clear();
             if (iteration == 1) {
@@ -134,6 +136,14 @@ var axis = /** @class */ (function () {
                 _this.draw_figure([[100, -100, -100], [-100, -100, -100], [0, 100, 0]], "black", "rgba(255,255,255,0.5)");
                 _this.draw_figure([[100, -100, 100], [100, -100, -100], [0, 100, 0]], "black", "rgba(255,255,255,0.5)");
                 _this.draw_figure([[-100, -100, 100], [-100, -100, -100], [0, 100, 0]], "black", "rgba(255,255,255,0.5)");
+            }
+            else if (iteration == 3) {
+                _this.draw_figure([[-100, -100, 100], [100, -100, 100], [100, -100, -100], [-100, -100, -100]], "black", "rgba(255,255,255,0.5)");
+                _this.draw_figure([[-100, -100, 100], [100, -100, 100], [0, 100, 0]], "black", "rgba(255,255,255,0.5)");
+                _this.draw_figure([[100, -100, -100], [-100, -100, -100], [0, 100, 0]], "black", "rgba(255,255,255,0.5)");
+                _this.draw_figure([[100, -100, 100], [100, -100, -100], [0, 100, 0]], "black", "rgba(255,255,255,0.5)");
+                _this.draw_figure([[-100, -100, 100], [-100, -100, -100], [0, 100, 0]], "black", "rgba(255,255,255,0.5)");
+                step = 0, step2 = 0, step3 = 0;
             }
             _this.draw_figure([[-20, -20, 20], [20, -20, 20], [20, 20, 20], [-20, 20, 20]], "black");
             _this.draw_figure([[-20, -20, -20], [20, -20, -20], [20, 20, -20], [-20, 20, -20]], "black");
@@ -209,7 +219,6 @@ var axis = /** @class */ (function () {
         }
         if (rotate <= 90) {
             return [b, a];
-            //this.cnvs.line(center[0], center[1], center[0] + b, center[1] + a, "black");
         }
         else if (rotate > 90 && rotate <= 180) {
             return [-b, a];
@@ -223,5 +232,3 @@ var axis = /** @class */ (function () {
     };
     return axis;
 }());
-//this.cnvs.line(2550/2, 1440, 2550/2, 0, "white");
-//this.cnvs.line(0, 1440/2, 2550, 1440/2, "white");
